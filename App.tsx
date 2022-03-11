@@ -1,20 +1,27 @@
-import { StatusBar } from 'expo-status-bar';
-import { StyleSheet, Text, View } from 'react-native';
+import { NavigationContainer } from "@react-navigation/native";
+import { createStackNavigator } from "@react-navigation/stack";
+import BasicDetail from "./src/screens/BasicDetail";
+import Home from "./src/screens/Home";
+import PokeRegister from "./src/screens/PokeRegister";
+import { PokeProvider } from "./src/context/PokeProvider";
 
-export default function App() {
+const Stack = createStackNavigator();
+
+const App = () => {
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
+    <PokeProvider>
+      <NavigationContainer>
+        <Stack.Navigator>
+          <Stack.Screen name="Home" component={Home}></Stack.Screen>
+          <Stack.Screen name="Register" component={PokeRegister}></Stack.Screen>
+          <Stack.Screen
+            name="Basic Details"
+            component={BasicDetail}
+          ></Stack.Screen>
+        </Stack.Navigator>
+      </NavigationContainer>
+    </PokeProvider>
   );
-}
+};
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+export default App;
